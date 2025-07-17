@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM操作とEventListener - JavaScript技術解説</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DOM操作とEventListener</h1>
+            <p>JavaScriptによる動的なWebページ制作の基礎技術</p>
+        </header>
+
+        <div class="content">
+            <section class="section">
+                <h2>1. DOM（Document Object Model）とは</h2>
+                <p>DOMは、HTMLドキュメントをプログラムから操作するためのインターフェースです。HTMLの各要素をオブジェクトとして表現し、JavaScriptから動的に操作できます。</p>
+                
+                <h3>DOMの基本概念</h3>
+                <p>DOMは木構造（ツリー構造）でHTMLドキュメントを表現します。各HTMLタグは「ノード」として扱われ、親子関係を持ちます。</p>
+                
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// DOMの基本的な取得方法
+const element = document.getElementById('myId');         // ID指定
+const elements = document.getElementsByClassName('myClass'); // クラス指定
+const elements2 = document.getElementsByTagName('div');      // タグ指定
+const element2 = document.querySelector('.myClass');        // CSS選択子
+const elements3 = document.querySelectorAll('.myClass');    // 複数取得
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>2. DOM操作の基本技術</h2>
+                
+                <h3>2-1. 要素の取得と操作</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：要素の取得と操作</div>
+                    <div id="demo-element" style="padding: 20px; background: #e3f2fd; border-radius: 8px; margin: 10px 0;">
+                        この要素を操作してみましょう
+                    </div>
+                    <button onclick="changeText()">テキスト変更</button>
+                    <button onclick="changeStyle()">スタイル変更</button>
+                    <button onclick="resetElement()">リセット</button>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// 要素の取得
+const element = document.getElementById('demo-element');
+
+// テキストの変更
+element.textContent = '新しいテキスト';
+element.innerHTML = '&lt;strong&gt;HTML付きテキスト&lt;/strong&gt;';
+
+// スタイルの変更
+element.style.backgroundColor = '#ffcdd2';
+element.style.color = '#d32f2f';
+
+// 属性の操作
+element.setAttribute('class', 'new-class');
+element.getAttribute('id');
+element.removeAttribute('class');
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>2-2. 要素の追加・削除</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：要素の動的追加・削除</div>
+                    <div id="dynamic-container">
+                        <p>ここに要素が追加されます</p>
+                    </div>
+                    <button onclick="addElement()">要素追加</button>
+                    <button onclick="removeElement()">要素削除</button>
+                    <button onclick="clearContainer()">全削除</button>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// 新しい要素の作成
+const newElement = document.createElement('div');
+newElement.textContent = '新しい要素';
+newElement.className = 'new-item';
+
+// 要素の追加
+parentElement.appendChild(newElement);        // 末尾に追加
+parentElement.insertBefore(newElement, referenceElement); // 指定位置に追加
+
+// 要素の削除
+parentElement.removeChild(childElement);      // 子要素を削除
+element.remove();                            // 要素自体を削除
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>3. EventListenerの基本概念</h2>
+                <p>EventListenerは、ユーザーの操作（クリック、キー入力など）やページの状態変化（読み込み完了など）に反応してJavaScriptのコードを実行する仕組みです。</p>
+
+                <h3>3-1. 基本的なイベントリスナー</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：基本的なイベント</div>
+                    <button id="click-demo">クリックしてください</button>
+                    <div id="click-result" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
+                        クリック回数: <span id="click-count">0</span>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// イベントリスナーの基本形
+element.addEventListener('click', function(event) {
+    console.log('クリックされました！');
+    console.log('イベント情報:', event);
+});
+
+// アロー関数での書き方
+element.addEventListener('click', (event) => {
+    console.log('クリックされました！');
+});
+
+// 名前付き関数での書き方
+function handleClick(event) {
+    console.log('クリックされました！');
+}
+element.addEventListener('click', handleClick);
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>3-2. 様々なイベントタイプ</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：様々なイベント</div>
+                    <input type="text" id="text-input" placeholder="ここに入力してください">
+                    <select id="select-demo">
+                        <option value="">選択してください</option>
+                        <option value="option1">オプション1</option>
+                        <option value="option2">オプション2</option>
+                        <option value="option3">オプション3</option>
+                    </select>
+                    <div class="demo-box" id="hover-demo" title="マウスオーバーしてください"></div>
+                    <div id="event-log" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; max-height: 150px; overflow-y: auto;">
+                        <strong>イベントログ:</strong>
+                        <ul id="event-list"></ul>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// 様々なイベントタイプ
+input.addEventListener('input', handleInput);        // 入力時
+input.addEventListener('focus', handleFocus);        // フォーカス時
+input.addEventListener('blur', handleBlur);          // フォーカスが外れた時
+
+select.addEventListener('change', handleChange);     // 選択変更時
+
+element.addEventListener('mouseenter', handleMouseEnter); // マウスオーバー時
+element.addEventListener('mouseleave', handleMouseLeave); // マウスアウト時
+
+document.addEventListener('keydown', handleKeyDown); // キー押下時
+window.addEventListener('resize', handleResize);     // ウィンドウリサイズ時
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>4. 実践的な応用例</h2>
+                
+                <h3>4-1. フォームバリデーション</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：リアルタイムフォームバリデーション</div>
+                    <form id="validation-form">
+                        <div style="margin-bottom: 10px;">
+                            <label>メールアドレス:</label><br>
+                            <input type="email" id="email-input" placeholder="example@example.com" style="width: 300px;">
+                            <div id="email-error" style="color: red; font-size: 0.9em;"></div>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <label>パスワード:</label><br>
+                            <input type="password" id="password-input" placeholder="8文字以上" style="width: 300px;">
+                            <div id="password-error" style="color: red; font-size: 0.9em;"></div>
+                        </div>
+                        <button type="submit">送信</button>
+                    </form>
+                </div>
+
+                <h3>4-2. ToDoリストアプリ</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：ToDoリストアプリ</div>
+                    <div style="margin-bottom: 10px;">
+                        <input type="text" id="todo-input" placeholder="新しいタスクを入力" style="width: 300px;">
+                        <button onclick="addTodo()">追加</button>
+                    </div>
+                    <div id="todo-list"></div>
+                    <div style="margin-top: 10px;">
+                        <button onclick="clearCompleted()">完了済みを削除</button>
+                        <button onclick="clearAll()">全て削除</button>
+                    </div>
+                </div>
+
+                <h3>4-3. プログレスバー</h3>
+                <div class="demo-area">
+                    <div class="demo-title">実演：プログレスバー</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button onclick="startProgress()">開始</button>
+                        <button onclick="resetProgress()">リセット</button>
+                        <span id="progress-text">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>8. 実践ゲーム：DOM操作とEventListenerを活用したゲーム集</h2>
+                <p>DOM操作とEventListenerの技術を使って、実際に動作するゲームを作成してみましょう。</p>
+                
+                <h3>8-1. 神経衰弱ゲーム</h3>
+                <div class="game-container">
+                    <div class="demo-title">🎮 神経衰弱ゲーム</div>
+                    <p>カードをクリックして、同じ数字のペアを見つけてください！</p>
+                    <div class="game-stats">
+                        <div>試行回数: <span id="memory-attempts">0</span></div>
+                        <div>見つけたペア: <span id="memory-pairs">0</span> / 8</div>
+                        <div>時間: <span id="memory-time">0</span>秒</div>
+                    </div>
+                    <div class="game-board" id="memory-board"></div>
+                    <div class="game-controls">
+                        <button onclick="startMemoryGame()">新しいゲーム</button>
+                        <button onclick="resetMemoryGame()">リセット</button>
+                    </div>
+                </div>
+
+                <h3>8-2. スネークゲーム</h3>
+                <div class="game-container">
+                    <div class="demo-title">🐍 スネークゲーム</div>
+                    <p>矢印キーまたはWASDキーでスネークを操作して、食べ物を取得してください！</p>
+                    <div class="game-stats">
+                        <div>スコア: <span id="snake-score">0</span></div>
+                        <div>最高スコア: <span id="snake-high-score">0</span></div>
+                        <div id="snake-status">準備完了</div>
+                    </div>
+                    <canvas id="snake-canvas" class="snake-game" width="400" height="400"></canvas>
+                    <div class="game-controls">
+                        <button onclick="startSnakeGame()">スタート</button>
+                        <button onclick="pauseSnakeGame()">一時停止</button>
+                        <button onclick="resetSnakeGame()">リセット</button>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">
+                        操作方法: 矢印キー または WASD キーで移動
+                    </p>
+                </div>
+
+                <h3>8-3. リアクションゲーム</h3>
+                <div class="game-container">
+                    <div class="demo-title">⚡ リアクションゲーム</div>
+                    <p>画面が緑色になったら、できるだけ早くクリックしてください！</p>
+                    <div class="game-stats">
+                        <div>最速タイム: <span id="reaction-best">-</span>ms</div>
+                        <div>平均タイム: <span id="reaction-average">-</span>ms</div>
+                        <div>試行回数: <span id="reaction-attempts">0</span></div>
+                    </div>
+                    <div id="reaction-area" style="width: 100%; height: 200px; background: #e9ecef; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;">
+                        クリックして開始
+                    </div>
+                    <div class="game-controls">
+                        <button onclick="startReactionGame()">新しいゲーム</button>
+                        <button onclick="resetReactionStats()">記録リセット</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>9. ゲームのコード解説</h2>
+                <p>上記のゲームで使用されているDOM操作とEventListenerの技術を解説します。</p>
+                
+                <h3>9-1. 神経衰弱ゲームのコード</h3>
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// 神経衰弱ゲームの実装例
+class MemoryGame {
+    constructor() {
+        this.cards = [];
+        this.flippedCards = [];
+        this.attempts = 0;
+        this.pairs = 0;
+        this.gameStarted = false;
+    }
+
+    createCard(number, index) {
+        const card = document.createElement('div');
+        card.className = 'game-tile';
+        card.dataset.number = number;
+        card.dataset.index = index;
+        card.textContent = '?';
+        
+        // イベントリスナーを追加
+        card.addEventListener('click', (e) => this.flipCard(e.target));
+        
+        return card;
+    }
+
+    flipCard(card) {
+        if (this.flippedCards.length < 2 && !card.classList.contains('revealed')) {
+            card.classList.add('revealed');
+            card.textContent = card.dataset.number;
+            this.flippedCards.push(card);
+            
+            if (this.flippedCards.length === 2) {
+                this.checkMatch();
+            }
+        }
+    }
+
+    checkMatch() {
+        const [card1, card2] = this.flippedCards;
+        this.attempts++;
+        
+        if (card1.dataset.number === card2.dataset.number) {
+            // マッチした場合
+            card1.classList.add('matched');
+            card2.classList.add('matched');
+            this.pairs++;
+            this.flippedCards = [];
+        } else {
+            // マッチしなかった場合
+            setTimeout(() => {
+                card1.classList.remove('revealed');
+                card2.classList.remove('revealed');
+                card1.textContent = '?';
+                card2.textContent = '?';
+                this.flippedCards = [];
+            }, 1000);
+        }
+    }
+}
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>9-2. スネークゲームのコード</h3>
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// スネークゲームの実装例
+class SnakeGame {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.gridSize = 20;
+        this.snake = [{x: 200, y: 200}];
+        this.direction = {x: 0, y: 0};
+        this.food = this.generateFood();
+        this.score = 0;
+        
+        // キーボードイベントリスナー
+        document.addEventListener('keydown', (e) => this.handleKeyPress(e));
+    }
+
+    handleKeyPress(event) {
+        const key = event.key;
+        
+        // 矢印キーとWASDキーに対応
+        switch(key) {
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+                if (this.direction.y !== this.gridSize) {
+                    this.direction = {x: 0, y: -this.gridSize};
+                }
+                break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+                if (this.direction.y !== -this.gridSize) {
+                    this.direction = {x: 0, y: this.gridSize};
+                }
+                break;
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+                if (this.direction.x !== this.gridSize) {
+                    this.direction = {x: -this.gridSize, y: 0};
+                }
+                break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+                if (this.direction.x !== -this.gridSize) {
+                    this.direction = {x: this.gridSize, y: 0};
+                }
+                break;
+        }
+    }
+
+    update() {
+        // スネークの頭を移動
+        const head = {
+            x: this.snake[0].x + this.direction.x,
+            y: this.snake[0].y + this.direction.y
+        };
+
+        // 壁との衝突判定
+        if (head.x < 0 || head.x >= this.canvas.width || 
+            head.y < 0 || head.y >= this.canvas.height) {
+            return false; // ゲームオーバー
+        }
+
+        // 自分との衝突判定
+        if (this.snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+            return false; // ゲームオーバー
+        }
+
+        this.snake.unshift(head);
+
+        // 食べ物を取得したかチェック
+        if (head.x === this.food.x && head.y === this.food.y) {
+            this.score++;
+            this.food = this.generateFood();
+        } else {
+            this.snake.pop();
+        }
+
+        return true; // ゲーム続行
+    }
+}
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>10. 高度なテクニック</h2>
+                
+                <h3>5-1. イベントデリゲーション</h3>
+                <p>イベントデリゲーションは、親要素にイベントリスナーを設定し、子要素のイベントを一括で処理する技術です。動的に追加される要素にも対応できます。</p>
+                
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// イベントデリゲーションの例
+document.getElementById('parent').addEventListener('click', function(event) {
+    if (event.target.classList.contains('child-button')) {
+        console.log('子要素のボタンがクリックされました');
+        console.log('クリックされた要素:', event.target);
+    }
+});
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>5-2. イベントの制御</h3>
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// イベントの伝播を止める
+event.stopPropagation();
+
+// デフォルトの動作を防ぐ
+event.preventDefault();
+
+// イベントリスナーの削除
+element.removeEventListener('click', handleClick);
+
+// 一度だけ実行されるイベントリスナー
+element.addEventListener('click', handleClick, { once: true });
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>5-3. カスタムイベント</h3>
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// カスタムイベントの作成
+const customEvent = new CustomEvent('myCustomEvent', {
+    detail: { message: 'Hello from custom event!' }
+});
+
+// カスタムイベントの発火
+element.dispatchEvent(customEvent);
+
+// カスタムイベントのリスナー
+element.addEventListener('myCustomEvent', function(event) {
+    console.log(event.detail.message);
+});
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>11. パフォーマンスの考慮事項</h2>
+                <p>DOM操作とイベントリスナーは適切に使用しないとパフォーマンスの問題を引き起こす可能性があります。</p>
+                
+                <h3>ベストプラクティス</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>大量のDOM操作は<span class="highlight">DocumentFragment</span>を使用してまとめて処理</li>
+                    <li>不要になったイベントリスナーは<span class="highlight">removeEventListener</span>で削除</li>
+                    <li>頻繁に発生するイベント（scroll、resize）は<span class="highlight">throttle</span>や<span class="highlight">debounce</span>を使用</li>
+                    <li>イベントデリゲーションを活用して、イベントリスナーの数を最小限に</li>
+                </ul>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <pre>
+// DocumentFragmentを使った効率的なDOM操作
+const fragment = document.createDocumentFragment();
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement('div');
+    div.textContent = `Item ${i}`;
+    fragment.appendChild(div);
+}
+document.getElementById('container').appendChild(fragment);
+
+// Debounceの例
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+const debouncedHandler = debounce(handleInput, 300);
+input.addEventListener('input', debouncedHandler);
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>7. まとめ</h2>
+                <p>DOM操作とEventListenerは、モダンなWebアプリケーション開発において必須の技術です。基本的な概念から高度なテクニックまで理解することで、インタラクティブで使いやすいWebページを作成できます。</p>
+                
+                <h3>重要なポイント</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>DOMはHTMLドキュメントのプログラム的な表現</li>
+                    <li>EventListenerでユーザーの操作に反応する動的なページを作成</li>
+                    <li>適切なイベントタイプと処理方法を選択することが重要</li>
+                    <li>パフォーマンスを考慮した実装を心がける</li>
+                    <li>イベントデリゲーションなどの高度な技術も活用する</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footer">
+            <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）: 約8時間</p>
+            <p>DOM操作とEventListenerの技術解説 - JavaScript実践チュートリアル</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>
