@@ -225,14 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         progressText.textContent = '0%';
     };
 
-    // 仮のゲーム関数
-    window.startMemoryGame = () => alert('メモリーゲーム開始（未実装）');
-    window.resetMemoryGame = () => alert('メモリーゲームリセット（未実装）');
-    window.startSnakeGame = () => alert('スネークゲーム開始（未実装）');
-    window.pauseSnakeGame = () => alert('スネークゲーム一時停止（未実装）');
-    window.resetSnakeGame = () => alert('スネークゲームリセット（未実装）');
-    window.startReactionGame = () => alert('反応速度ゲーム開始（未実装）');
-    window.resetReactionStats = () => alert('反応速度ゲーム統計リセット（未実装）');
 
     // コードコピー関数
     window.copyCode = function (button) {

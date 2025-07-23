@@ -33,7 +33,7 @@ body {
 /* ===== レイアウトコンテナ ===== */
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    mardein: 0 auto;
     padding: 2rem;
 }
 
