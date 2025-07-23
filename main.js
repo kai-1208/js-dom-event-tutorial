@@ -225,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         progressText.textContent = '0%';
     };
 
-
     // コードコピー関数
     window.copyCode = function (button) {
         const pre = button.closest('.code-block')?.querySelector('pre');
@@ -243,4 +242,73 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('コピーに失敗しました');
         });
     };
+
+    // コードエディター
+    (function () {
+        const modal = document.getElementById('editor-modal');
+        const closeBtn = document.getElementById('editor-close');
+        const runBtn = document.getElementById('run-code');
+        const insertBtn = document.getElementById('insert-template');
+        const errorBox = document.getElementById('editor-error');
+        const iframe = document.getElementById('result-frame');
+
+        function buildFrame() {
+            const html = document.getElementById('html-code').value;
+            const css = `<style>${document.getElementById('css-code').value}</style>`;
+            const jsContent = document.getElementById('js-code').value;
+
+            const js = `<script>
+            window.addEventListener('DOMContentLoaded', function() {
+                    try {
+                        ${jsContent}
+                    } catch (e) {
+                        document.body.innerHTML += '<pre style="color:red;">' + e + '</pre>';
+                    }
+                });
+            <\/script>`;
+            return html + css + js;
+        }
+
+        function runCode() {
+            try {
+                const content = buildFrame();
+                iframe.srcdoc = content;
+                errorBox.textContent = '';
+            } catch (e) {
+                errorBox.textContent = e.message;
+            }
+        }
+
+        function insertTemplate() {
+            document.getElementById('html-code').value = '<button id="btn">Click</button>';
+            document.getElementById('css-code').value = '#btn { color: red; }';
+            document.getElementById('js-code').value = `document.getElementById('btn').addEventListener('click', () => {
+  alert('クリックされました');
+});`;
+        }
+
+        function openEditor() {
+            modal.classList.remove('hide');
+            modal.style.display = 'flex'; // 初期表示（display: none → flex）
+            requestAnimationFrame(() => {
+                modal.classList.add('show'); // アニメーション開始（opacity: 1）
+            });
+
+            errorBox.textContent = '';
+            document.getElementById('html-code').value = '';
+            document.getElementById('css-code').value = '';
+            document.getElementById('js-code').value = '';
+        }
+        window.openEditor = openEditor;
+
+        runBtn.addEventListener('click', runCode);
+        insertBtn.addEventListener('click', insertTemplate);
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300); // アニメーション時間と同じ（0.3s）
+        });
+    })();
 });

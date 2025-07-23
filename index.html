@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,57 @@
     <link rel="stylesheet" href="main.css">
     <script src="main.js"></script>
 </head>
+
 <body>
+    <!-- ボタン -->
+    <button onclick="openEditor()" class="editor-button">コードエディタを開く</button>
+
+    <!-- モーダル -->
+    <div id="editor-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="editor-close" class="modal-close">&times;</span>
+            <h2>コードエディタ</h2>
+            <div class="editor-container">
+                <div class="editor-pane">
+                    <label for="html-code">HTML</label>
+                    <textarea id="html-code" placeholder="<button id='btn'>Click</button>"></textarea>
+                </div>
+                <div class="editor-pane">
+                    <label for="css-code">CSS</label>
+                    <textarea id="css-code" placeholder="#btn { color: red; }"></textarea>
+                </div>
+                <div class="editor-pane">
+                    <label for="js-code">JavaScript</label>
+                    <textarea id="js-code"
+                        placeholder="document.getElementById('btn').addEventListener(...)"></textarea>
+                </div>
+            </div>
+            <div class="editor-controls">
+                <button id="run-code">実行</button>
+                <button id="insert-template">テンプレート挿入</button>
+            </div>
+            <div class="editor-result">
+                <iframe id="result-frame" sandbox="allow-scripts allow-modals"></iframe>
+                <div id="editor-error"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>DOM操作とEventListener</h1>
             <p>JavaScriptによる動的なWebページ制作の基礎技術</p>
+            <p>右下の"コードエディタを開く"を押して、実際にコードを実行しよう</p>
         </header>
 
         <div class="content">
             <section class="section">
                 <h2>1. DOM（Document Object Model）とは</h2>
                 <p>DOMは、HTMLドキュメントをプログラムから操作するためのインターフェースです。HTMLの各要素をオブジェクトとして表現し、JavaScriptから動的に操作できます。</p>
-                
+
                 <h3>DOMの基本概念</h3>
                 <p>DOMは木構造（ツリー構造）でHTMLドキュメントを表現します。各HTMLタグは「ノード」として扱われ、親子関係を持ちます。</p>
-                
+
                 <div class="code-container">
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">コピー</button>
@@ -39,11 +76,12 @@ const elements3 = document.querySelectorAll('.myClass');    // 複数取得
 
             <section class="section">
                 <h2>2. DOM操作の基本技術</h2>
-                
+
                 <h3>2-1. 要素の取得と操作</h3>
                 <div class="demo-area">
                     <div class="demo-title">実演：要素の取得と操作</div>
-                    <div id="demo-element" style="padding: 20px; background: #e3f2fd; border-radius: 8px; margin: 10px 0;">
+                    <div id="demo-element"
+                        style="padding: 20px; background: #e3f2fd; border-radius: 8px; margin: 10px 0;">
                         この要素を操作してみましょう
                     </div>
                     <button onclick="changeText()">テキスト変更</button>
@@ -114,7 +152,8 @@ element.remove();                            // 要素自体を削除
                 <div class="demo-area">
                     <div class="demo-title">実演：基本的なイベント</div>
                     <button id="click-demo">クリックしてください</button>
-                    <div id="click-result" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
+                    <div id="click-result"
+                        style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
                         クリック回数: <span id="click-count">0</span>
                     </div>
                 </div>
@@ -154,7 +193,8 @@ element.addEventListener('click', handleClick);
                         <option value="option3">オプション3</option>
                     </select>
                     <div class="demo-box" id="hover-demo" title="マウスオーバーしてください"></div>
-                    <div id="event-log" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; max-height: 150px; overflow-y: auto;">
+                    <div id="event-log"
+                        style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; max-height: 150px; overflow-y: auto;">
                         <strong>イベントログ:</strong>
                         <ul id="event-list"></ul>
                     </div>
@@ -183,14 +223,15 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
 
             <section class="section">
                 <h2>4. 実践的な応用例</h2>
-                
+
                 <h3>4-1. フォームバリデーション</h3>
                 <div class="demo-area">
                     <div class="demo-title">実演：リアルタイムフォームバリデーション</div>
                     <form id="validation-form">
                         <div style="margin-bottom: 10px;">
                             <label>メールアドレス:</label><br>
-                            <input type="email" id="email-input" placeholder="example@example.com" style="width: 300px;">
+                            <input type="email" id="email-input" placeholder="example@example.com"
+                                style="width: 300px;">
                             <div id="email-error" style="color: red; font-size: 0.9em;"></div>
                         </div>
                         <div style="margin-bottom: 10px;">
@@ -232,10 +273,10 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
 
             <section class="section">
                 <h2>5. 高度なテクニック</h2>
-                
+
                 <h3>5-1. イベントデリゲーション</h3>
                 <p>イベントデリゲーションは、親要素にイベントリスナーを設定し、子要素のイベントを一括で処理する技術です。動的に追加される要素にも対応できます。</p>
-                
+
                 <div class="code-container">
                     <div class="code-block">
                         <button class="copy-button" onclick="copyCode(this)">コピー</button>
@@ -296,12 +337,13 @@ element.addEventListener('myCustomEvent', function(event) {
             <section class="section">
                 <h2>6. パフォーマンスの考慮事項</h2>
                 <p>DOM操作とイベントリスナーは適切に使用しないとパフォーマンスの問題を引き起こす可能性があります。</p>
-                
+
                 <h3>ベストプラクティス</h3>
                 <ul style="margin-left: 20px; margin-top: 10px;">
                     <li>大量のDOM操作は<span class="highlight">DocumentFragment</span>を使用してまとめて処理</li>
                     <li>不要になったイベントリスナーは<span class="highlight">removeEventListener</span>で削除</li>
-                    <li>頻繁に発生するイベント（scroll、resize）は<span class="highlight">throttle</span>や<span class="highlight">debounce</span>を使用</li>
+                    <li>頻繁に発生するイベント（scroll、resize）は<span class="highlight">throttle</span>や<span
+                            class="highlight">debounce</span>を使用</li>
                     <li>イベントデリゲーションを活用して、イベントリスナーの数を最小限に</li>
                 </ul>
 
@@ -340,8 +382,9 @@ input.addEventListener('input', debouncedHandler);
 
             <section class="section">
                 <h2>7. まとめ</h2>
-                <p>DOM操作とEventListenerは、モダンなWebアプリケーション開発において必須の技術です。基本的な概念から高度なテクニックまで理解することで、インタラクティブで使いやすいWebページを作成できます。</p>
-                
+                <p>DOM操作とEventListenerは、モダンなWebアプリケーション開発において必須の技術です。基本的な概念から高度なテクニックまで理解することで、インタラクティブで使いやすいWebページを作成できます。
+                </p>
+
                 <h3>重要なポイント</h3>
                 <ul style="margin-left: 20px; margin-top: 10px;">
                     <li>DOMはHTMLドキュメントのプログラム的な表現</li>
@@ -359,6 +402,7 @@ input.addEventListener('input', debouncedHandler);
         </div>
     </div>
 
-    
+
 </body>
+
 </html>
