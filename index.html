@@ -35,7 +35,7 @@
             </div>
             <div class="editor-controls">
                 <button id="run-code">実行</button>
-                <button id="insert-template">テンプレート挿入</button>
+                <button id="insert-template">簡易テンプレート挿入</button>
             </div>
             <div class="editor-result">
                 <iframe id="result-frame" sandbox="allow-scripts allow-modals"></iframe>
@@ -61,7 +61,9 @@
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // DOMの基本的な取得方法
 const element = document.getElementById('myId');         // ID指定
@@ -91,7 +93,10 @@ const elements3 = document.querySelectorAll('.myClass');    // 複数取得
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="edit-button" onclick="loadDemoInEditor('dom-manipulation')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // 要素の取得
 const element = document.getElementById('demo-element');
@@ -125,7 +130,10 @@ element.removeAttribute('class');
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="edit-button" onclick="loadDemoInEditor('dynamic-elements')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // 新しい要素の作成
 const newElement = document.createElement('div');
@@ -160,7 +168,11 @@ element.remove();                            // 要素自体を削除
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="edit-button"
+                                onclick="loadDemoInEditor('event-listener-basic')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // イベントリスナーの基本形
 element.addEventListener('click', function(event) {
@@ -202,7 +214,11 @@ element.addEventListener('click', handleClick);
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="edit-button"
+                                onclick="loadDemoInEditor('event-listener-various')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // 様々なイベントタイプ
 input.addEventListener('input', handleInput);        // 入力時
@@ -243,6 +259,54 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                     </form>
                 </div>
 
+                <div class="code-container">
+                    <div class="code-block">
+                        <div class="code-block-buttons">
+                            <button class="edit-button" onclick="loadDemoInEditor('form-validation')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
+                        <pre>
+// リアルタイムで入力値をチェックします
+const emailInput = document.getElementById('email-input');
+const passwordInput = document.getElementById('password-input');
+
+emailInput.addEventListener('input', (event) => {
+    const email = event.target.value;
+    const errorDiv = document.getElementById('email-error');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '') {
+        errorDiv.textContent = '';
+    } else if (emailRegex.test(email)) {
+        errorDiv.style.color = 'green';
+        errorDiv.textContent = '✓ 有効な形式です';
+    } else {
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = 'メールアドレスの形式が正しくありません';
+    }
+});
+passwordInput.addEventListener('input', (event) => {
+    const password = event.target.value;
+    const errorDiv = document.getElementById('password-error');
+    if (password === '') {
+        errorDiv.textContent = '';
+    } else if (password.length >= 8) {
+        errorDiv.style.color = 'green';
+        errorDiv.textContent = '✓ 8文字以上です';
+    } else {
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = 'パスワードは8文字以上で入力してください';
+    }
+});
+
+// submitイベントのデフォルト動作をキャンセル
+document.getElementById('validation-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    alert('フォームが送信されました！ (実際の送信は行いません)');
+});
+                        </pre>
+                    </div>
+                </div>
+
                 <h3>4-2. ToDoリストアプリ</h3>
                 <div class="demo-area">
                     <div class="demo-title">実演：ToDoリストアプリ</div>
@@ -254,6 +318,56 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                     <div style="margin-top: 10px;">
                         <button onclick="clearCompleted()">完了済みを削除</button>
                         <button onclick="clearAll()">全て削除</button>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <div class="code-block-buttons">
+                            <button class="edit-button" onclick="loadDemoInEditor('todo-app')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
+                        <pre>
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+
+window.addTodo = function() {
+    const todoText = todoInput.value.trim();
+    if (todoText === '') return;
+
+    const todoItem = document.createElement('div');
+    // CSSでスタイルを当てるためクラス名を付与
+    todoItem.className = 'todo-item'; 
+    todoItem.innerHTML = `
+        &lt;span&gt;${todoText}&lt;/span&gt;
+        &lt;div&gt;
+            &lt;button onclick="toggleTodo(this)"&gt;完了&lt;/button&gt;
+            &lt;button onclick="toggleTodo(this)"&gt;削除&lt;/button&gt;
+        &lt;/div&gt;
+    todoList.appendChild(todoItem);
+    todoInput.value = '';
+}
+window.toggleTodo = function(button) {
+    const todoItem = button.closest('.todo-item');
+    todoItem.classList.toggle('completed');
+    button.textContent = todoItem.classList.contains('completed') ? '取消' : '完了';
+}
+window.deleteTodo = function(button) {
+    button.closest('.todo-item').remove();
+}
+window.clearCompleted = function() {
+    document.querySelectorAll('.todo-item.completed').forEach(item => item.remove());
+}
+window.clearAll = function() {
+    todoList.innerHTML = '';
+}
+// Enterキーでも追加できるようにする
+todoInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        addTodo();
+    }
+});
+                        </pre>
                     </div>
                 </div>
 
@@ -269,6 +383,41 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                         <span id="progress-text">0%</span>
                     </div>
                 </div>
+
+                <div class="code-container">
+                    <div class="code-block">
+                        <div class="code-block-buttons">
+                            <button class="edit-button" onclick="loadDemoInEditor('progress-bar')">エディタで開く</button>
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
+                        <pre>
+let progressInterval;
+const progressFill = document.getElementById('progress-fill');
+const progressText = document.getElementById('progress-text');
+
+window.startProgress = function () {
+    let progress = 0;
+    // 既に動いていればリセットする
+    clearInterval(progressInterval); 
+    progressInterval = setInterval(() => {
+        if (progress >= 100) {
+            clearInterval(progressInterval);
+            return;
+        }
+        progress += 1;
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = `${progress}%`;
+    }, 50); // 50ミリ秒ごとに実行
+};
+
+window.resetProgress = function () {
+    clearInterval(progressInterval);
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+};
+                        </pre>
+                    </div>
+                </div>
             </section>
 
             <section class="section">
@@ -279,7 +428,9 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // イベントデリゲーションの例
 document.getElementById('parent').addEventListener('click', function(event) {
@@ -295,7 +446,9 @@ document.getElementById('parent').addEventListener('click', function(event) {
                 <h3>5-2. イベントの制御</h3>
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // イベントの伝播を止める
 event.stopPropagation();
@@ -315,7 +468,9 @@ element.addEventListener('click', handleClick, { once: true });
                 <h3>5-3. カスタムイベント</h3>
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // カスタムイベントの作成
 const customEvent = new CustomEvent('myCustomEvent', {
@@ -349,7 +504,9 @@ element.addEventListener('myCustomEvent', function(event) {
 
                 <div class="code-container">
                     <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        <div class="code-block-buttons">
+                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
+                        </div>
                         <pre>
 // DocumentFragmentを使った効率的なDOM操作
 const fragment = document.createDocumentFragment();

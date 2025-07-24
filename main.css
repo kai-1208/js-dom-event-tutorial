@@ -1,6 +1,6 @@
 /* main.css - refined version based on the design guide */
 
-/* ===== グローバル設定とカラーパレット ===== */
+/*  グローバル設定とカラーパレット  */
 :root {
     --main-color: #3A50A0;
     --accent-color: #ffa56e;
@@ -30,7 +30,7 @@ body {
     min-height: 100vh;
 }
 
-/* ===== レイアウトコンテナ ===== */
+/*  レイアウトコンテナ  */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -89,8 +89,14 @@ body {
     background: white;
     padding: 1em;
     border-radius: 8px;
-    width: 90%;
-    max-width: 960px;
+    /* width: 90%;
+    max-width: 960px; */
+    width: 95vw;
+    max-width: 1400px;
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-close {
@@ -103,6 +109,8 @@ body {
     display: flex;
     gap: 10px;
     margin-bottom: 1em;
+    flex-grow: 1;
+    min-height: 0;
 }
 
 .editor-pane {
@@ -112,7 +120,7 @@ body {
 }
 
 .editor-pane textarea {
-    min-height: 100px;
+    min-height: 250px;
     font-family: monospace;
     resize: vertical;
 }
@@ -121,9 +129,16 @@ body {
     margin-bottom: 1em;
 }
 
+.editor-result {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
 .editor-result iframe {
     width: 100%;
-    height: 200px;
+    /* height: 200px; */
+    flex-grow: 1;
     border: 1px solid #ccc;
     margin-bottom: 10px;
 }
@@ -134,7 +149,7 @@ body {
 }
 
 
-/* ===== ヘッダー ===== */
+/*  ヘッダー  */
 header {
     position: sticky;
     top: 0;
@@ -160,7 +175,7 @@ header p {
     color: var(--text-color);
 }
 
-/* ===== セクション ===== */
+/*  セクション  */
 .section {
     margin-bottom: 3rem;
 }
@@ -181,7 +196,7 @@ header p {
     margin: 1.5rem 0 1rem;
 }
 
-/* ===== コンテンツカードスタイル ===== */
+/*  コンテンツカードスタイル  */
 .content,
 .card {
     background: var(--background-color);
@@ -198,7 +213,6 @@ header p {
     box-shadow: 0 8px 24px var(--shadow-hover-color);
 }
 
-/* ===== コードブロックとコピー機能 ===== */
 .code-block {
     position: relative;
     background: #2d2d2d;
@@ -209,10 +223,18 @@ header p {
     font-family: 'Courier New', monospace;
 }
 
-.copy-button {
+.code-block-buttons {
     position: absolute;
     top: 10px;
     right: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.copy-button {
+    /* position: absolute;
+    top: 10px;
+    right: 10px; */
     background: var(--main-color);
     color: white;
     border: none;
@@ -233,7 +255,24 @@ header p {
     background: #17a2b8;
 }
 
-/* ===== ボタンスタイル ===== */
+.edit-button {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    opacity: 0.8;
+}
+
+.edit-button:hover {
+    opacity: 1;
+    background: #138496;
+}
+
+/*  ボタンスタイル  */
 button {
     background: var(--main-color);
     color: white;
@@ -252,7 +291,7 @@ button:hover {
     box-shadow: 0 6px 20px var(--shadow-hover-color);
 }
 
-/* ===== デモエリア ===== */
+/*  デモエリア  */
 .demo-area {
     background: #f8f9fa;
     border: 2px solid var(--main-color);
@@ -269,7 +308,7 @@ button:hover {
     margin-bottom: 1rem;
 }
 
-/* ===== プログレスバー ===== */
+/*  プログレスバー  */
 .progress-bar {
     width: 100%;
     height: 20px;
@@ -285,7 +324,7 @@ button:hover {
     transition: width 0.3s ease;
 }
 
-/* ===== 引用・コードインライン ===== */
+/*  引用・コードインライン  */
 blockquote {
     margin: 20px 0;
     padding: 15px 20px;
@@ -306,7 +345,7 @@ pre code {
     padding: 0;
 }
 
-/* ===== 入力フォーム ===== */
+/*  入力フォーム  */
 input,
 select {
     padding: 10px;
@@ -323,7 +362,7 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(58, 80, 160, 0.2);
 }
 
-/* ===== フッター ===== */
+/*  フッター  */
 .footer {
     background: var(--main-color);
     color: white;
@@ -333,7 +372,7 @@ select:focus {
     margin-top: 2rem;
 }
 
-/* ===== メディアクエリ ===== */
+/*  メディアクエリ  */
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
