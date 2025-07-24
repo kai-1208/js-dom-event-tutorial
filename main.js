@@ -667,4 +667,5 @@ window.resetProgress = function () {
             }, 300); // アニメーション時間と同じ（0.3s）
         });
     })();
+
 });

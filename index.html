@@ -10,49 +10,27 @@
 </head>
 
 <body>
-    <!-- ボタン -->
-    <button onclick="openEditor()" class="editor-button">コードエディタを開く</button>
-
-    <!-- モーダル -->
-    <div id="editor-modal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span id="editor-close" class="modal-close">&times;</span>
-            <h2>コードエディタ</h2>
-            <div class="editor-container">
-                <div class="editor-pane">
-                    <label for="html-code">HTML</label>
-                    <textarea id="html-code" placeholder="<button id='btn'>Click</button>"></textarea>
-                </div>
-                <div class="editor-pane">
-                    <label for="css-code">CSS</label>
-                    <textarea id="css-code" placeholder="#btn { color: red; }"></textarea>
-                </div>
-                <div class="editor-pane">
-                    <label for="js-code">JavaScript</label>
-                    <textarea id="js-code"
-                        placeholder="document.getElementById('btn').addEventListener(...)"></textarea>
-                </div>
-            </div>
-            <div class="editor-controls">
-                <button id="run-code">実行</button>
-                <button id="insert-template">簡易テンプレート挿入</button>
-            </div>
-            <div class="editor-result">
-                <iframe id="result-frame" sandbox="allow-scripts allow-modals"></iframe>
-                <div id="editor-error"></div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <header>
-            <h1>DOM操作とEventListener</h1>
-            <p>JavaScriptによる動的なWebページ制作の基礎技術</p>
-            <p>右下の"コードエディタを開く"を押して、実際にコードを実行しよう</p>
+            <div class="header-title">
+                <h1>DOM操作とEventListener</h1>
+                <p>JavaScriptによる動的なWebページ制作の基礎技術</p>
+            </div>
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="#section-1">DOMとは</a></li>
+                    <li><a href="#section-2">DOM操作</a></li>
+                    <li><a href="#section-3">EventListener</a></li>
+                    <li><a href="#section-4">応用例</a></li>
+                    <li><a href="#section-5">高度なテクニック</a></li>
+                    <li><a href="#section-6">パフォーマンス</a></li>
+                    <li><a href="#section-7">まとめ</a></li>
+                </ul>
+            </nav>
         </header>
 
         <div class="content">
-            <section class="section">
+            <section id="section-1" class="section">
                 <h2>1. DOM（Document Object Model）とは</h2>
                 <p>DOMは、HTMLドキュメントをプログラムから操作するためのインターフェースです。HTMLの各要素をオブジェクトとして表現し、JavaScriptから動的に操作できます。</p>
 
@@ -76,7 +54,7 @@ const elements3 = document.querySelectorAll('.myClass');    // 複数取得
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-2" class="section">
                 <h2>2. DOM操作の基本技術</h2>
 
                 <h3>2-1. 要素の取得と操作</h3>
@@ -152,7 +130,7 @@ element.remove();                            // 要素自体を削除
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-3" class="section">
                 <h2>3. EventListenerの基本概念</h2>
                 <p>EventListenerは、ユーザーの操作（クリック、キー入力など）やページの状態変化（読み込み完了など）に反応してJavaScriptのコードを実行する仕組みです。</p>
 
@@ -237,7 +215,7 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-4" class="section">
                 <h2>4. 実践的な応用例</h2>
 
                 <h3>4-1. フォームバリデーション</h3>
@@ -420,7 +398,7 @@ window.resetProgress = function () {
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-5" class="section">
                 <h2>5. 高度なテクニック</h2>
 
                 <h3>5-1. イベントデリゲーション</h3>
@@ -489,7 +467,7 @@ element.addEventListener('myCustomEvent', function(event) {
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-6" class="section">
                 <h2>6. パフォーマンスの考慮事項</h2>
                 <p>DOM操作とイベントリスナーは適切に使用しないとパフォーマンスの問題を引き起こす可能性があります。</p>
 
@@ -537,7 +515,7 @@ input.addEventListener('input', debouncedHandler);
                 </div>
             </section>
 
-            <section class="section">
+            <section id="section-7" class="section">
                 <h2>7. まとめ</h2>
                 <p>DOM操作とEventListenerは、モダンなWebアプリケーション開発において必須の技術です。基本的な概念から高度なテクニックまで理解することで、インタラクティブで使いやすいWebページを作成できます。
                 </p>
@@ -554,12 +532,44 @@ input.addEventListener('input', debouncedHandler);
         </div>
 
         <div class="footer">
-            <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）: 約8時間</p>
+            <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）: 約15時間</p>
             <p>DOM操作とEventListenerの技術解説 - JavaScript実践チュートリアル</p>
         </div>
     </div>
 
+    <!-- ボタン -->
+    <button onclick="openEditor()" class="editor-button">コードエディタを開く</button>
 
+    <!-- モーダル -->
+    <div id="editor-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="editor-close" class="modal-close">&times;</span>
+            <h2>コードエディタ</h2>
+            <div class="editor-container">
+                <div class="editor-pane">
+                    <label for="html-code">HTML</label>
+                    <textarea id="html-code" placeholder="<button id='btn'>Click</button>"></textarea>
+                </div>
+                <div class="editor-pane">
+                    <label for="css-code">CSS</label>
+                    <textarea id="css-code" placeholder="#btn { color: red; }"></textarea>
+                </div>
+                <div class="editor-pane">
+                    <label for="js-code">JavaScript</label>
+                    <textarea id="js-code"
+                        placeholder="document.getElementById('btn').addEventListener(...)"></textarea>
+                </div>
+            </div>
+            <div class="editor-controls">
+                <button id="run-code">実行</button>
+                <button id="insert-template">簡易テンプレート挿入</button>
+            </div>
+            <div class="editor-result">
+                <iframe id="result-frame" sandbox="allow-scripts allow-modals"></iframe>
+                <div id="editor-error"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
