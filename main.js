@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // フォームバリデーション
     const emailInput = document.getElementById('email-input');
     const passwordInput = document.getElementById('password-input');
+
     if (emailInput) {
         emailInput.addEventListener('input', function (event) {
             const email = event.target.value;
@@ -115,11 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (email === '') {
                 errorDiv.textContent = '';
-            } else if (!emailRegex.test(email)) {
-                errorDiv.textContent = 'メールアドレスの形式が正しくありません';
+                errorDiv.classList.remove('valid', 'invalid');
+            } else if (emailRegex.test(email)) {
+                errorDiv.textContent = '✓ 有効な形式です';
+                errorDiv.classList.add('valid');
+                errorDiv.classList.remove('invalid');
             } else {
-                errorDiv.style.color = 'green';
-                errorDiv.textContent = '✓ 有効なメールアドレスです';
+                errorDiv.textContent = 'メールアドレスの形式が正しくありません';
+                errorDiv.classList.add('invalid');
+                errorDiv.classList.remove('valid');
             }
         });
     }
@@ -128,13 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.addEventListener('input', function (event) {
             const password = event.target.value;
             const errorDiv = document.getElementById('password-error');
+
             if (password === '') {
                 errorDiv.textContent = '';
-            } else if (password.length < 8) {
-                errorDiv.textContent = 'パスワードは8文字以上で入力してください';
+                errorDiv.classList.remove('valid', 'invalid');
+            } else if (password.length >= 8) {
+                errorDiv.textContent = '✓ 8文字以上です';
+                errorDiv.classList.add('valid');
+                errorDiv.classList.remove('invalid');
             } else {
-                errorDiv.style.color = 'green';
-                errorDiv.textContent = '✓ 有効なパスワードです';
+                errorDiv.textContent = 'パスワードは8文字以上で入力してください';
+                errorDiv.classList.add('invalid');
+                errorDiv.classList.remove('valid');
             }
         });
     }

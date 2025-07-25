@@ -234,12 +234,12 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                         <div class="form-group">
                             <label>メールアドレス:</label><br>
                             <input type="email" id="email-input" placeholder="example@example.com">
-                            <div id="email-error" style="color: red; font-size: 0.9em;"></div>
+                            <div id="email-error" class="error-message"></div>
                         </div>
                         <div class="form-group">
                             <label>パスワード:</label><br>
                             <input type="password" id="password-input" placeholder="8文字以上">
-                            <div id="password-error" style="color: red; font-size: 0.9em;"></div>
+                            <div id="password-error" class="error-message"></div>
                         </div>
                         <button type="submit">送信</button>
                     </form>
@@ -363,7 +363,7 @@ todoInput.addEventListener('keypress', function (event) {
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
-                    <div style="margin-top: 10px;">
+                    <div class="progress-controls">
                         <button onclick="startProgress()">開始</button>
                         <button onclick="resetProgress()">リセット</button>
                         <span id="progress-text">0%</span>
@@ -424,7 +424,7 @@ window.resetProgress = function () {
 
         <div class="footer">
             <div class="footer-info">
-                <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約25時間</p>
+                <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約20時間</p>
                 <p>DOM操作とEventListenerの技術解説 - JavaScript実践チュートリアル</p>
             </div>
             <div class="footer-links">

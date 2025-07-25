@@ -384,12 +384,18 @@ select:focus {
 #validation-form input[type="password"] {
     width: 300px;
 }
-#email-error, #password-error {
-    color: red;
+.error-message {
     font-size: 0.9em;
     min-height: 1.2em;
 }
 
+.error-message.valid {
+    color: green;
+}
+
+.error-message.invalid {
+    color: red;
+}
 
 /* セクション4-2: ToDoリストのスタイル */
 .todo-input-group {
@@ -399,6 +405,11 @@ select:focus {
     width: 300px;
 }
 .todo-controls {
+    margin-top: 10px;
+}
+
+/* プログレスバーのコントロール */
+.progress-controls {
     margin-top: 10px;
 }
 
