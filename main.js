@@ -657,15 +657,23 @@ window.resetProgress = function () {
         }
         window.openEditor = openEditor;
 
-        runBtn.addEventListener('click', runCode);
-        insertBtn.addEventListener('click', insertTemplate);
-        closeBtn.addEventListener('click', () => {
+        
+        function closeEditor() {
             modal.classList.remove('show');
             modal.classList.add('hide');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 300); // アニメーション時間と同じ（0.3s）
+            }, 300); // アニメーション時間と同じ
+        }
+
+        runBtn.addEventListener('click', runCode);
+        insertBtn.addEventListener('click', insertTemplate);
+        closeBtn.addEventListener('click', closeEditor);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('show')) {
+                closeEditor();
+            }
         });
     })();
-
 });

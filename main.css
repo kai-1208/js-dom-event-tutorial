@@ -1,6 +1,4 @@
-/* main.css - refined version based on the design guide */
-
-/*  グローバル設定とカラーパレット  */
+/* グローバル設定とカラーパレット */
 :root {
     --main-color: #3A50A0;
     --accent-color: #ffa56e;
@@ -30,73 +28,79 @@ body {
     min-height: 100vh;
 }
 
-/*  レイアウトコンテナ  */
+/* レイアウトコンテナ */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
 }
 
-/*  ヘッダー  */
-header {
+/* ページタイトル */
+.page-title {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.page-title h1 {
+    font-family: 'Santello', cursive;
+    font-size: 2.8rem;
+    color: var(--main-color);
+    margin: 0;
+}
+
+.page-title p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+}
+
+/* スティッキーナビゲーションバー */
+.sticky-nav {
     position: sticky;
     top: 0;
     z-index: 100;
     background-color: #ffffffdd;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     box-shadow: 0 4px 10px var(--shadow-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 2rem;
 }
 
-.header-title h1 {
-    font-family: 'Santello', cursive;
-    font-size: 2rem;
-    color: var(--main-color);
-    margin: 0;
-}
-
-.header-title p {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    margin: 0;
-}
-
-/* ヘッダー内ナビゲーション */
-.header-nav ul {
+.sticky-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
 }
 
-.header-nav a {
+.sticky-nav a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: bold;
-    padding: 8px 6px;
+    padding: 8px 12px;
     border-radius: 6px;
     transition: background-color 0.2s, color 0.2s;
 }
 
-.header-nav a:hover {
+.sticky-nav a:hover {
     background-color: var(--accent-color);
     color: white;
 }
 
-.header-nav a.active {
+.sticky-nav a.active {
     background-color: var(--main-color);
     color: white;
 }
 
-/*  セクション  */
+/* セクション */
 .section {
-    padding-top: 125px;
-    margin-top: -125px;
+    padding-top: 70px;
+    margin-top: -70px;
     margin-bottom: 3rem;
 }
 
@@ -116,7 +120,7 @@ header {
     margin: 1.5rem 0 1rem;
 }
 
-/*  コンテンツカードスタイル  */
+/* コンテンツカードスタイル */
 .content,
 .card {
     background: var(--background-color);
@@ -152,9 +156,6 @@ header {
 }
 
 .copy-button {
-    /* position: absolute;
-    top: 10px;
-    right: 10px; */
     background: var(--main-color);
     color: white;
     border: none;
@@ -192,7 +193,7 @@ header {
     background: #138496;
 }
 
-/*  ボタンスタイル  */
+/* ボタンスタイル */
 button {
     background: var(--main-color);
     color: white;
@@ -211,7 +212,7 @@ button:hover {
     box-shadow: 0 6px 20px var(--shadow-hover-color);
 }
 
-/*  デモエリア  */
+/* デモエリア */
 .demo-area {
     background: #f8f9fa;
     border: 2px solid var(--main-color);
@@ -228,7 +229,7 @@ button:hover {
     margin-bottom: 1rem;
 }
 
-/*  プログレスバー  */
+/* プログレスバー */
 .progress-bar {
     width: 100%;
     height: 20px;
@@ -244,7 +245,7 @@ button:hover {
     transition: width 0.3s ease;
 }
 
-/*  引用・コードインライン  */
+/* 引用・コードインライン */
 blockquote {
     margin: 20px 0;
     padding: 15px 20px;
@@ -265,7 +266,7 @@ pre code {
     padding: 0;
 }
 
-/*  入力フォーム  */
+/* 入力フォーム */
 input,
 select {
     padding: 10px;
@@ -282,7 +283,7 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(58, 80, 160, 0.2);
 }
 
-/*  フッター  */
+/* フッター */
 .footer {
     background: var(--main-color);
     color: white;
@@ -297,7 +298,6 @@ select:focus {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    /* モーダルより下だが他要素より前面 */
     padding: 12px 18px;
     background-color: #3f51b5;
     color: white;
@@ -344,8 +344,6 @@ select:focus {
     background: white;
     padding: 1em;
     border-radius: 8px;
-    /* width: 90%;
-    max-width: 960px; */
     width: 95vw;
     max-width: 1400px;
     height: 90vh;
@@ -392,7 +390,6 @@ select:focus {
 
 .editor-result iframe {
     width: 100%;
-    /* height: 200px; */
     flex-grow: 1;
     border: 1px solid #ccc;
     margin-bottom: 10px;
@@ -403,7 +400,7 @@ select:focus {
     font-family: monospace;
 }
 
-/*  メディアクエリ  */
+/* メディアクエリ */
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
