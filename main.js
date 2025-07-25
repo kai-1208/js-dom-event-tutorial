@@ -243,6 +243,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // CodeMirrorの初期化
+    const editorOptions = {
+        lineNumbers: true,
+        tabSize: 2,
+        theme: 'lucario',
+        lineWrapping: true,
+    };
+
+    const htmlEditor = CodeMirror.fromTextArea(document.getElementById('html-code'), {
+        ...editorOptions,
+        mode: 'xml',
+    });
+    const cssEditor = CodeMirror.fromTextArea(document.getElementById('css-code'), {
+        ...editorOptions,
+        mode: 'css',
+    });
+    const jsEditor = CodeMirror.fromTextArea(document.getElementById('js-code'), {
+        ...editorOptions,
+        mode: 'javascript',
+    });
+
     // 各デモのHTML, CSS, JSコードを格納するデータソース
     const demoCodes = {
         'dom-manipulation': {
@@ -592,9 +613,12 @@ window.resetProgress = function () {
         openEditor();
 
         // 取得したコードを各テキストエリアに設定
-        document.getElementById('html-code').value = codes.html;
-        document.getElementById('css-code').value = codes.css;
-        document.getElementById('js-code').value = codes.js;
+        // document.getElementById('html-code').value = codes.html;
+        // document.getElementById('css-code').value = codes.css;
+        // document.getElementById('js-code').value = codes.js;
+        htmlEditor.setValue(codes.html);
+        cssEditor.setValue(codes.css);
+        jsEditor.setValue(codes.js);
     }
     // HTMLから呼び出せるように、関数をグローバルスコープに公開
     window.loadDemoInEditor = loadDemoInEditor;
@@ -609,18 +633,26 @@ window.resetProgress = function () {
         const iframe = document.getElementById('result-frame');
 
         function buildFrame() {
-            const html = document.getElementById('html-code').value;
-            const css = `<style>${document.getElementById('css-code').value}</style>`;
-            const jsContent = document.getElementById('js-code').value;
+            // const html = document.getElementById('html-code').value;
+            // const css = `<style>${document.getElementById('css-code').value}</style>`;
+            // const jsContent = document.getElementById('js-code').value;
+
+            // const js = `<script>
+            // window.addEventListener('DOMContentLoaded', function() {
+            //         try {
+            //             ${jsContent}
+            //         } catch (e) {
+            //             document.body.innerHTML += '<pre style="color:red;">' + e + '</pre>';
+            //         }
+            //     });
+            // <\/script>`;
+
+            const html = htmlEditor.getValue();
+            const css = `<style>${cssEditor.getValue()}</style>`;
+            const jsContent = jsEditor.getValue();
 
             const js = `<script>
-            window.addEventListener('DOMContentLoaded', function() {
-                    try {
-                        ${jsContent}
-                    } catch (e) {
-                        document.body.innerHTML += '<pre style="color:red;">' + e + '</pre>';
-                    }
-                });
+                try { ${jsContent} } catch (e) { document.body.innerText = e; }
             <\/script>`;
             return html + css + js;
         }
@@ -636,11 +668,17 @@ window.resetProgress = function () {
         }
 
         function insertTemplate() {
-            document.getElementById('html-code').value = '<button id="btn">Click</button>';
-            document.getElementById('css-code').value = '#btn { color: red; }';
-            document.getElementById('js-code').value = `document.getElementById('btn').addEventListener('click', () => {
-  alert('クリックされました');
-});`;
+            //             document.getElementById('html-code').value = '<button id="btn">Click</button>';
+            //             document.getElementById('css-code').value = '#btn { color: red; }';
+            //             document.getElementById('js-code').value = `document.getElementById('btn').addEventListener('click', () => {
+            //   alert('クリックされました');
+            // });`;
+
+            htmlEditor.setValue('<button id="btn">Click Me</button>');
+            cssEditor.setValue('#btn { color: red; }');
+            jsEditor.setValue(`document.getElementById('btn').addEventListener('click', () => {
+    alert('Clicked!');
+});`);
         }
 
         function openEditor() {
@@ -651,13 +689,23 @@ window.resetProgress = function () {
             });
 
             errorBox.textContent = '';
-            document.getElementById('html-code').value = '';
-            document.getElementById('css-code').value = '';
-            document.getElementById('js-code').value = '';
+            // document.getElementById('html-code').value = '';
+            // document.getElementById('css-code').value = '';
+            // document.getElementById('js-code').value = '';
+
+            htmlEditor.setValue('');
+            cssEditor.setValue('');
+            jsEditor.setValue('');
+            // CodeMirrorは表示/非表示の切り替え後にリフレッシュが必要な場合がある
+            setTimeout(() => {
+                htmlEditor.refresh();
+                cssEditor.refresh();
+                jsEditor.refresh();
+            }, 10);
         }
         window.openEditor = openEditor;
 
-        
+
         function closeEditor() {
             modal.classList.remove('show');
             modal.classList.add('hide');

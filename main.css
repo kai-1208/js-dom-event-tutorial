@@ -429,10 +429,17 @@ select:focus {
     flex-direction: column;
 }
 
-.editor-pane textarea {
+/* .editor-pane textarea {
     min-height: 250px;
     font-family: monospace;
     resize: vertical;
+} */
+
+/* CodeMirrorエディタのコンテナスタイル */
+.editor-pane .CodeMirror {
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .editor-controls {

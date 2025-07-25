@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM操作とEventListenerについて - JavaScript技術解説</title>
+    <!-- CodeMirrorの基本CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <!-- CodeMirrorのテーマCSS（Chrome DevTools風のテーマ）-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/lucario.min.css">
+
+    <!-- CodeMirrorの基本JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/javascript/javascript.min.js"></script>
     <link rel="stylesheet" href="main.css">
     <script src="main.js"></script>
 </head>
@@ -33,7 +43,8 @@
                 <p>DOMは、HTMLドキュメントをプログラムから操作するためのインターフェースです。HTMLの各要素をオブジェクトとして表現し、JavaScriptから動的に操作できます。</p>
 
                 <h3>DOMの基本概念</h3>
-                <p>DOMは、HTMLドキュメントを木構造（ツリー構造）で表現する仕組みで、各HTMLタグは親子関係を持つ「ノード」として扱われます。下の図（筆者作成）は、その階層構造を視覚的に表したものです。最上位の&lt;html&gt;から、&lt;title&gt;や&lt;h1&gt;、&lt;p&gt;といった要素がどのように親子関係を形成しているかを確認できます。</p>
+                <p>DOMは、HTMLドキュメントを木構造（ツリー構造）で表現する仕組みで、各HTMLタグは親子関係を持つ「ノード」として扱われます。下の図（筆者作成）は、その階層構造を視覚的に表したものです。最上位の&lt;html&gt;から、&lt;title&gt;や&lt;h1&gt;、&lt;p&gt;といった要素がどのように親子関係を形成しているかを確認できます。
+                </p>
 
                 <figure class="diagram-figure">
                     <img src="images/dom-tree.png" alt="DOMのツリー構造を解説した図解" class="dom-tree-diagram">
