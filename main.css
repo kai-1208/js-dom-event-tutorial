@@ -287,10 +287,43 @@ select:focus {
 .footer {
     background: var(--main-color);
     color: white;
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    margin-top: 2rem;
+    padding: 2rem 3rem;
+    border-radius: 20px 20px 0 0;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-info {
+    text-align: left;
+}
+
+.footer-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.footer-info p:first-child {
+    margin-bottom: 5px;
+}
+
+.footer-links a {
+    display: inline-block;
+}
+
+.github-icon {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+    transition: transform 0.2s ease-in-out, opacity 0.2s;
+}
+
+.github-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.85;
 }
 
 /* コードエディターを開くボタン */
