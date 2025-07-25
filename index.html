@@ -31,9 +31,7 @@
                 <li><a href="#section-2">DOM操作</a></li>
                 <li><a href="#section-3">EventListener</a></li>
                 <li><a href="#section-4">応用例</a></li>
-                <li><a href="#section-5">高度なテクニック</a></li>
-                <li><a href="#section-6">パフォーマンス</a></li>
-                <li><a href="#section-7">まとめ</a></li>
+                <li><a href="#section-5">まとめ</a></li>
             </ul>
         </nav>
 
@@ -74,8 +72,7 @@ const elements3 = document.querySelectorAll('.myClass');    // 複数取得
                 <h3>2-1. 要素の取得と操作</h3>
                 <div class="demo-area">
                     <div class="demo-title">実演：要素の取得と操作</div>
-                    <div id="demo-element"
-                        style="padding: 20px; background: #e3f2fd; border-radius: 8px; margin: 10px 0;">
+                    <div id="demo-element">
                         この要素を操作してみましょう
                     </div>
                     <button onclick="changeText()">テキスト変更</button>
@@ -152,8 +149,7 @@ element.remove();                            // 要素自体を削除
                 <div class="demo-area">
                     <div class="demo-title">実演：基本的なイベント</div>
                     <button id="click-demo">クリックしてください</button>
-                    <div id="click-result"
-                        style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
+                    <div id="click-result">
                         クリック回数: <span id="click-count">0</span>
                     </div>
                 </div>
@@ -197,8 +193,7 @@ element.addEventListener('click', handleClick);
                         <option value="option3">オプション3</option>
                     </select>
                     <div class="demo-box" id="hover-demo" title="マウスオーバーしてください"></div>
-                    <div id="event-log"
-                        style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; max-height: 150px; overflow-y: auto;">
+                    <div id="event-log">
                         <strong>イベントログ:</strong>
                         <ul id="event-list"></ul>
                     </div>
@@ -236,15 +231,14 @@ window.addEventListener('resize', handleResize);     // ウィンドウリサイ
                 <div class="demo-area">
                     <div class="demo-title">実演：リアルタイムフォームバリデーション</div>
                     <form id="validation-form">
-                        <div style="margin-bottom: 10px;">
+                        <div class="form-group">
                             <label>メールアドレス:</label><br>
-                            <input type="email" id="email-input" placeholder="example@example.com"
-                                style="width: 300px;">
+                            <input type="email" id="email-input" placeholder="example@example.com">
                             <div id="email-error" style="color: red; font-size: 0.9em;"></div>
                         </div>
-                        <div style="margin-bottom: 10px;">
+                        <div class="form-group">
                             <label>パスワード:</label><br>
-                            <input type="password" id="password-input" placeholder="8文字以上" style="width: 300px;">
+                            <input type="password" id="password-input" placeholder="8文字以上">
                             <div id="password-error" style="color: red; font-size: 0.9em;"></div>
                         </div>
                         <button type="submit">送信</button>
@@ -302,12 +296,12 @@ document.getElementById('validation-form').addEventListener('submit', (event) =>
                 <h3>4-2. ToDoリストアプリ</h3>
                 <div class="demo-area">
                     <div class="demo-title">実演：ToDoリストアプリ</div>
-                    <div style="margin-bottom: 10px;">
-                        <input type="text" id="todo-input" placeholder="新しいタスクを入力" style="width: 300px;">
+                    <div class="todo-input-group">
+                        <input type="text" id="todo-input" placeholder="新しいタスクを入力">
                         <button onclick="addTodo()">追加</button>
                     </div>
                     <div id="todo-list"></div>
-                    <div style="margin-top: 10px;">
+                    <div class="todo-controls">
                         <button onclick="clearCompleted()">完了済みを削除</button>
                         <button onclick="clearAll()">全て削除</button>
                     </div>
@@ -413,129 +407,12 @@ window.resetProgress = function () {
             </section>
 
             <section id="section-5" class="section">
-                <h2>5. 高度なテクニック</h2>
-
-                <h3>5-1. イベントデリゲーション</h3>
-                <p>イベントデリゲーションは、親要素にイベントリスナーを設定し、子要素のイベントを一括で処理する技術です。動的に追加される要素にも対応できます。</p>
-
-                <div class="code-container">
-                    <div class="code-block">
-                        <div class="code-block-buttons">
-                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
-                        </div>
-                        <pre>
-// イベントデリゲーションの例
-document.getElementById('parent').addEventListener('click', function(event) {
-    if (event.target.classList.contains('child-button')) {
-        console.log('子要素のボタンがクリックされました');
-        console.log('クリックされた要素:', event.target);
-    }
-});
-                        </pre>
-                    </div>
-                </div>
-
-                <h3>5-2. イベントの制御</h3>
-                <div class="code-container">
-                    <div class="code-block">
-                        <div class="code-block-buttons">
-                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
-                        </div>
-                        <pre>
-// イベントの伝播を止める
-event.stopPropagation();
-
-// デフォルトの動作を防ぐ
-event.preventDefault();
-
-// イベントリスナーの削除
-element.removeEventListener('click', handleClick);
-
-// 一度だけ実行されるイベントリスナー
-element.addEventListener('click', handleClick, { once: true });
-                        </pre>
-                    </div>
-                </div>
-
-                <h3>5-3. カスタムイベント</h3>
-                <div class="code-container">
-                    <div class="code-block">
-                        <div class="code-block-buttons">
-                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
-                        </div>
-                        <pre>
-// カスタムイベントの作成
-const customEvent = new CustomEvent('myCustomEvent', {
-    detail: { message: 'Hello from custom event!' }
-});
-
-// カスタムイベントの発火
-element.dispatchEvent(customEvent);
-
-// カスタムイベントのリスナー
-element.addEventListener('myCustomEvent', function(event) {
-    console.log(event.detail.message);
-});
-                        </pre>
-                    </div>
-                </div>
-            </section>
-
-            <section id="section-6" class="section">
-                <h2>6. パフォーマンスの考慮事項</h2>
-                <p>DOM操作とイベントリスナーは適切に使用しないとパフォーマンスの問題を引き起こす可能性があります。</p>
-
-                <h3>ベストプラクティス</h3>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>大量のDOM操作は<span class="highlight">DocumentFragment</span>を使用してまとめて処理</li>
-                    <li>不要になったイベントリスナーは<span class="highlight">removeEventListener</span>で削除</li>
-                    <li>頻繁に発生するイベント（scroll、resize）は<span class="highlight">throttle</span>や<span
-                            class="highlight">debounce</span>を使用</li>
-                    <li>イベントデリゲーションを活用して、イベントリスナーの数を最小限に</li>
-                </ul>
-
-                <div class="code-container">
-                    <div class="code-block">
-                        <div class="code-block-buttons">
-                            <button class="copy-button" onclick="copyCode(this)">コピー</button>
-                        </div>
-                        <pre>
-// DocumentFragmentを使った効率的なDOM操作
-const fragment = document.createDocumentFragment();
-for (let i = 0; i < 1000; i++) {
-    const div = document.createElement('div');
-    div.textContent = `Item ${i}`;
-    fragment.appendChild(div);
-}
-document.getElementById('container').appendChild(fragment);
-
-// Debounceの例
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-const debouncedHandler = debounce(handleInput, 300);
-input.addEventListener('input', debouncedHandler);
-                        </pre>
-                    </div>
-                </div>
-            </section>
-
-            <section id="section-7" class="section">
-                <h2>7. まとめ</h2>
+                <h2>5. まとめ</h2>
                 <p>DOM操作とEventListenerは、モダンなWebアプリケーション開発において必須の技術です。基本的な概念から高度なテクニックまで理解することで、インタラクティブで使いやすいWebページを作成できます。
                 </p>
 
                 <h3>重要なポイント</h3>
-                <ul style="margin-left: 20px; margin-top: 10px;">
+                <ul class="summary-list">
                     <li>DOMはHTMLドキュメントのプログラム的な表現</li>
                     <li>EventListenerでユーザーの操作に反応する動的なページを作成</li>
                     <li>適切なイベントタイプと処理方法を選択することが重要</li>
