@@ -33,7 +33,12 @@
                 <p>DOMは、HTMLドキュメントをプログラムから操作するためのインターフェースです。HTMLの各要素をオブジェクトとして表現し、JavaScriptから動的に操作できます。</p>
 
                 <h3>DOMの基本概念</h3>
-                <p>DOMは木構造（ツリー構造）でHTMLドキュメントを表現します。各HTMLタグは「ノード」として扱われ、親子関係を持ちます。</p>
+                <p>DOMは、HTMLドキュメントを木構造（ツリー構造）で表現する仕組みで、各HTMLタグは親子関係を持つ「ノード」として扱われます。下の図（筆者作成）は、その階層構造を視覚的に表したものです。最上位の&lt;html&gt;から、&lt;title&gt;や&lt;h1&gt;、&lt;p&gt;といった要素がどのように親子関係を形成しているかを確認できます。</p>
+
+                <figure class="diagram-figure">
+                    <img src="images/dom-tree.png" alt="DOMのツリー構造を解説した図解" class="dom-tree-diagram">
+                    <figcaption>図1: DOMの階層構造（ツリー構造）の例</figcaption>
+                </figure>
 
                 <div class="code-container">
                     <div class="code-block">
@@ -531,7 +536,7 @@ input.addEventListener('input', debouncedHandler);
 
         <div class="footer">
             <div class="footer-info">
-                <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約12時間</p>
+                <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約25時間</p>
                 <p>DOM操作とEventListenerの技術解説 - JavaScript実践チュートリアル</p>
             </div>
             <div class="footer-links">

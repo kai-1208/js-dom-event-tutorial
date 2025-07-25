@@ -120,6 +120,30 @@ body {
     margin: 1.5rem 0 1rem;
 }
 
+/* 図のスタイル */
+.diagram-figure {
+    margin: 2.5rem auto;
+    padding: 1rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.dom-tree-diagram {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.diagram-figure figcaption {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: #555;
+    font-style: italic;
+}
+
 /* コンテンツカードスタイル */
 .content,
 .card {
