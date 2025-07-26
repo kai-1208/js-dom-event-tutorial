@@ -618,19 +618,12 @@ window.resetProgress = function () {
             return;
         }
 
-        // 既存のopenEditor関数を呼び出してエディタを開く
-        // この関数は内部でテキストエリアをクリアするが、その直後に値を設定するので問題ない
         openEditor();
 
-        // 取得したコードを各テキストエリアに設定
-        // document.getElementById('html-code').value = codes.html;
-        // document.getElementById('css-code').value = codes.css;
-        // document.getElementById('js-code').value = codes.js;
         htmlEditor.setValue(codes.html);
         cssEditor.setValue(codes.css);
         jsEditor.setValue(codes.js);
     }
-    // HTMLから呼び出せるように、関数をグローバルスコープに公開
     window.loadDemoInEditor = loadDemoInEditor;
 
     // コードエディター
@@ -643,20 +636,6 @@ window.resetProgress = function () {
         const iframe = document.getElementById('result-frame');
 
         function buildFrame() {
-            // const html = document.getElementById('html-code').value;
-            // const css = `<style>${document.getElementById('css-code').value}</style>`;
-            // const jsContent = document.getElementById('js-code').value;
-
-            // const js = `<script>
-            // window.addEventListener('DOMContentLoaded', function() {
-            //         try {
-            //             ${jsContent}
-            //         } catch (e) {
-            //             document.body.innerHTML += '<pre style="color:red;">' + e + '</pre>';
-            //         }
-            //     });
-            // <\/script>`;
-
             const html = htmlEditor.getValue();
             const css = `<style>${cssEditor.getValue()}</style>`;
             const jsContent = jsEditor.getValue();
@@ -678,12 +657,6 @@ window.resetProgress = function () {
         }
 
         function insertTemplate() {
-            //             document.getElementById('html-code').value = '<button id="btn">Click</button>';
-            //             document.getElementById('css-code').value = '#btn { color: red; }';
-            //             document.getElementById('js-code').value = `document.getElementById('btn').addEventListener('click', () => {
-            //   alert('クリックされました');
-            // });`;
-
             htmlEditor.setValue('<button id="btn">Click Me</button>');
             cssEditor.setValue('#btn { color: red; }');
             jsEditor.setValue(`document.getElementById('btn').addEventListener('click', () => {
@@ -692,21 +665,17 @@ window.resetProgress = function () {
         }
 
         function openEditor() {
+            modal.style.display = 'flex';
             modal.classList.remove('hide');
-            modal.style.display = 'flex'; // 初期表示（display: none → flex）
             requestAnimationFrame(() => {
-                modal.classList.add('show'); // アニメーション開始（opacity: 1）
+                modal.classList.add('show');
             });
 
             errorBox.textContent = '';
-            // document.getElementById('html-code').value = '';
-            // document.getElementById('css-code').value = '';
-            // document.getElementById('js-code').value = '';
 
             htmlEditor.setValue('');
             cssEditor.setValue('');
             jsEditor.setValue('');
-            // CodeMirrorは表示/非表示の切り替え後にリフレッシュが必要な場合がある
             setTimeout(() => {
                 htmlEditor.refresh();
                 cssEditor.refresh();
@@ -721,7 +690,7 @@ window.resetProgress = function () {
             modal.classList.add('hide');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 300); // アニメーション時間と同じ
+            }, 300);
         }
 
         runBtn.addEventListener('click', runCode);
