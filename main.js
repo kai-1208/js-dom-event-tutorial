@@ -1,4 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ハンバーガーメニュー
+    const btn = document.getElementById('mobile-menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    const overlay = document.getElementById('mobile-nav-overlay');
+
+    function openMenu() {
+        nav.classList.add('open');
+        overlay.classList.add('open');
+        btn.innerHTML = '&times;';
+        btn.setAttribute('aria-label', 'メニューを閉じる');
+    }
+    function closeMenu() {
+        nav.classList.remove('open');
+        overlay.classList.remove('open');
+        btn.innerHTML = '&#9776;';
+        btn.setAttribute('aria-label', 'メニューを開く');
+    }
+
+    btn.addEventListener('click', () => {
+        nav.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+
     // クリックカウンター
     let clickCount = 0;
     const clickDemo = document.getElementById('click-demo');
