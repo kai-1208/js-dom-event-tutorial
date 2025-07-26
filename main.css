@@ -380,10 +380,12 @@ select:focus {
 .form-group {
     margin-bottom: 10px;
 }
+
 #validation-form input[type="email"],
 #validation-form input[type="password"] {
     width: 300px;
 }
+
 .error-message {
     font-size: 0.9em;
     min-height: 1.2em;
@@ -401,9 +403,11 @@ select:focus {
 .todo-input-group {
     margin-bottom: 10px;
 }
+
 .todo-input-group input[type="text"] {
     width: 300px;
 }
+
 .todo-controls {
     margin-top: 10px;
 }
@@ -539,19 +543,120 @@ select:focus {
         padding: 1rem;
     }
 
-    .header-title h1 {
+    .content {
+        padding: 1rem;
+    }
+
+    .page-title h1 {
         font-size: 1.8rem;
+    }
+
+    .sticky-nav {
+        display: none;
     }
 
     .section h2 {
         font-size: 1.5rem;
     }
 
-    .content {
-        padding: 1rem;
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
     }
 
-    .header-nav {
-        display: none;
+    .footer-info {
+        text-align: center;
+    }
+
+    .modal-content {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        max-height: 90vh;
+    }
+
+    .modal-close {
+        align-self: flex-end;
+        margin-bottom: 10px;
+    }
+
+    .modal-content h2 {
+        flex-shrink: 0;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .editor-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        flex-shrink: 0;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .editor-pane {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+    }
+
+    .editor-pane label {
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: var(--main-color);
+        font-size: 0.9rem;
+    }
+
+    .editor-pane .CodeMirror {
+        height: 120px !important;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .editor-controls {
+        flex-shrink: 0;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .editor-controls button {
+        margin: 3px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .editor-result {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        max-height: 250px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow-y: auto;
+    }
+
+    .editor-result iframe {
+        width: 100%;
+        flex: 1;
+        border: none;
+        min-height: 150px;
+    }
+
+    #editor-error {
+        padding: 8px;
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        max-height: 50px;
+        overflow-y: auto;
+        font-size: 0.75rem;
+        flex-shrink: 0;
     }
 }
