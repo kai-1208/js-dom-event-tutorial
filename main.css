@@ -502,12 +502,6 @@ select:focus {
     flex-direction: column;
 }
 
-/* .editor-pane textarea {
-    min-height: 250px;
-    font-family: monospace;
-    resize: vertical;
-} */
-
 /* CodeMirrorエディタのコンテナスタイル */
 .editor-pane .CodeMirror {
     height: 100%;
@@ -596,9 +590,7 @@ select:focus {
 
     .scrollable-editor-area {
         flex-grow: 1;
-        /* ★重要: 残りの可変スペースをすべて埋める */
         overflow-y: auto;
-        /* ★重要: このエリアだけをスクロールさせる */
         padding: 15px;
         min-height: 0;
     }
