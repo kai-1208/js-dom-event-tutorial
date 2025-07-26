@@ -441,24 +441,26 @@ window.resetProgress = function () {
         <div class="modal-content">
             <span id="editor-close" class="modal-close">&times;</span>
             <h2>コードエディタ</h2>
-            <div class="editor-container">
-                <div class="editor-pane">
-                    <label for="html-code">HTML</label>
-                    <textarea id="html-code" placeholder="<button id='btn'>Click</button>"></textarea>
+            <div class="scrollable-editor-area">
+                <div class="editor-container">
+                    <div class="editor-pane">
+                        <label for="html-code">HTML</label>
+                        <textarea id="html-code" placeholder="<button id='btn'>Click</button>"></textarea>
+                    </div>
+                    <div class="editor-pane">
+                        <label for="css-code">CSS</label>
+                        <textarea id="css-code" placeholder="#btn { color: red; }"></textarea>
+                    </div>
+                    <div class="editor-pane">
+                        <label for="js-code">JavaScript</label>
+                        <textarea id="js-code"
+                            placeholder="document.getElementById('btn').addEventListener(...)"></textarea>
+                    </div>
                 </div>
-                <div class="editor-pane">
-                    <label for="css-code">CSS</label>
-                    <textarea id="css-code" placeholder="#btn { color: red; }"></textarea>
+                <div class="editor-controls">
+                    <button id="run-code">実行</button>
+                    <button id="insert-template">簡易テンプレート挿入</button>
                 </div>
-                <div class="editor-pane">
-                    <label for="js-code">JavaScript</label>
-                    <textarea id="js-code"
-                        placeholder="document.getElementById('btn').addEventListener(...)"></textarea>
-                </div>
-            </div>
-            <div class="editor-controls">
-                <button id="run-code">実行</button>
-                <button id="insert-template">簡易テンプレート挿入</button>
             </div>
             <div class="editor-result">
                 <iframe id="result-frame" sandbox="allow-scripts allow-modals"></iframe>

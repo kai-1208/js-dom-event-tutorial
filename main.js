@@ -634,22 +634,64 @@ window.resetProgress = function () {
         const insertBtn = document.getElementById('insert-template');
         const errorBox = document.getElementById('editor-error');
         const iframe = document.getElementById('result-frame');
+        
+        const scrollableArea = document.querySelector('.scrollable-editor-area');
+        let scrollTimer;
+
+        if (scrollableArea) {
+            scrollableArea.addEventListener('scroll', function() {
+                iframe.style.pointerEvents = 'none';
+
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(function() {
+                    iframe.style.pointerEvents = 'auto';
+                }, 150);
+            });
+        }
 
         function buildFrame() {
             const html = htmlEditor.getValue();
-            const css = `<style>${cssEditor.getValue()}</style>`;
+            const css = cssEditor.getValue();
             const jsContent = jsEditor.getValue();
 
-            const js = `<script>
-                try { ${jsContent} } catch (e) { document.body.innerText = e; }
-            <\/script>`;
-            return html + css + js;
+            return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh; 
+            margin: 0;
+            padding: 15px;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        ${css}
+    </style>
+</head>
+<body>
+    ${html}
+    <script>
+        try {
+            ${jsContent}
+        } catch (e) {
+            document.body.innerHTML = '<pre style="color:red;">' + e + '</pre>';
+        }
+    </script>
+</body>
+</html>`;
         }
 
         function runCode() {
             try {
                 const content = buildFrame();
-                iframe.srcdoc = content;
+                iframe.src = 'about:blank';
+                setTimeout(() => {
+                    iframe.srcdoc = content;
+                }, 50);
                 errorBox.textContent = '';
             } catch (e) {
                 errorBox.textContent = e.message;
@@ -683,7 +725,6 @@ window.resetProgress = function () {
             }, 10);
         }
         window.openEditor = openEditor;
-
 
         function closeEditor() {
             modal.classList.remove('show');
