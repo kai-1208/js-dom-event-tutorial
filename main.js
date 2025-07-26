@@ -634,20 +634,6 @@ window.resetProgress = function () {
         const insertBtn = document.getElementById('insert-template');
         const errorBox = document.getElementById('editor-error');
         const iframe = document.getElementById('result-frame');
-        
-        const scrollableArea = document.querySelector('.scrollable-editor-area');
-        let scrollTimer;
-
-        if (scrollableArea) {
-            scrollableArea.addEventListener('scroll', function() {
-                iframe.style.pointerEvents = 'none';
-
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(function() {
-                    iframe.style.pointerEvents = 'auto';
-                }, 150);
-            });
-        }
 
         function buildFrame() {
             const html = htmlEditor.getValue();
